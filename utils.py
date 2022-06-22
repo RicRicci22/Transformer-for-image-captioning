@@ -1,3 +1,6 @@
+from itertools import chain
+
+
 def convert_to_words_ucm(input_file):
     with open(input_file,'r',encoding='utf-8') as file:
         content = file.read().lower()    
@@ -7,7 +10,7 @@ def convert_to_words_ucm(input_file):
         pieces = row.strip().split(' ') 
         pieces.append('endseq')
         pieces.insert(1,'startseq')
-        filename = int(pieces[0])
+        filename = (pieces[0])
         del(pieces[0])
         try:
             sentences[filename].append(pieces)
@@ -20,6 +23,7 @@ def convert_to_words_ucm(input_file):
 
     return sentences,max_l
 
+
 def create_lists_ucm_uav(train_filenames,val_filenames,test_filenames):
     train_ = []
     val_ = []
@@ -28,17 +32,17 @@ def create_lists_ucm_uav(train_filenames,val_filenames,test_filenames):
     with open(train_filenames,'r') as file:
         train = file.readlines()
     for line in train:
-        train_.append(int(line.split('.')[0]))
+        train_.append((line.split('.')[0]))
     # Test
     with open(test_filenames,'r') as file:
         test = file.readlines()
     for line in test:
-        test_.append(int(line.split('.')[0]))
+        test_.append((line.split('.')[0]))
     # Val 
     with open(val_filenames,'r') as file:
         val = file.readlines()
     for line in val:
-        val_.append(int(line.split('.')[0]))
+        val_.append((line.split('.')[0]))
     
     return train_,val_,test_
 

@@ -13,7 +13,7 @@ class Dataset_UCM:
         return len(self.sentences)
 
     def __getitem__(self,idx):
-        img = torch.Tensor(self.images[self.images_idx[idx]])
+        img = self.images[self.images_idx[idx]].squeeze(0)
         # Pad to max len 
         sentence = torch.zeros((1,self.max_len))
         sentence[0,:len(self.sentences[idx])] = torch.Tensor(self.sentences[idx])
